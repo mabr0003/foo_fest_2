@@ -1,11 +1,12 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { getSingleBand, getSchedule } from "@/lib/api";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import useLoginStore from "@/app/state/login";
 import LoginModal from "@/app/components/LoginModal";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const days = {
   mon: "Mandag",
@@ -19,6 +20,7 @@ const days = {
 
 export default function BandPage() {
   const { slug } = useParams();
+  const router = useRouter();
   const [band, setBand] = useState(null);
   const [schedule, setSchedule] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -94,6 +96,12 @@ export default function BandPage() {
 
   return (
     <div>
+      <div className="p-4">
+        <button onClick={() => router.back()} className="px-4 py-1 border-2 border-black rounded-lg">
+          <IoIosArrowRoundBack size={30} />
+        </button>
+      </div>
+
       <div className="md:grid grid-cols-2 p-20 gap-5">
         <div>
           <h1>{band?.name}</h1>

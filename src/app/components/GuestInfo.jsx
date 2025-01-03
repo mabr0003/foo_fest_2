@@ -20,10 +20,16 @@ const GuestInfo = ({ handleNextClick, handleBackClick, reservationId }) => {
     return guest.firstname.trim() && guest.lastname.trim() && guest.email.trim();
   };
 
+  const isFormComplete = guestInfo.every(isGuestComplete);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await sendData(guestInfo, reservationId);
-    handleNextClick();
+    if (isFormComplete) {
+      await sendData(guestInfo, reservationId);
+      handleNextClick();
+    } else {
+      alert("Venligst udfyld alle felter");
+    }
   };
 
   return (

@@ -1,4 +1,3 @@
-import Receipt from "./Receipt";
 import TicketFlowButton from "./TicketFlowButton";
 
 const Payment = ({ handleNextClick, handleBackClick }) => {
