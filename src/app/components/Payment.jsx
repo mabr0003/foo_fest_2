@@ -26,9 +26,6 @@ const Payment = ({ handleNextClick, handleBackClick }) => {
             </label>
           </div>
         </form>
-        <div>
-          <Receipt />
-        </div>
       </div>
       <div className="flex justify-self-center gap-5">
         <TicketFlowButton handleClick={handleBackClick} action="Tilbage" />

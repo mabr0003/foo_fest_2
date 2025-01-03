@@ -7,6 +7,7 @@ import Payment from "../components/Payment";
 import ReservationComplete from "./ReservationComplete";
 import { reserveSpot, fullfillReservation } from "@/lib/api";
 import useTicketStore from "../state/store";
+import Recepit from "./Receipt";
 
 const TicketSystem = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -74,9 +75,9 @@ const TicketSystem = () => {
   };
 
   return (
-    <div>
+    <div className={currentStep > 1 && currentStep !== 5 ? `md:grid md:grid-cols-[4fr_1fr] md:gap-5` : ""}>
       {/* Timer fra ChatGPT*/}
-      <div className={timer > 0 && currentStep !== 5 ? `border-2 border-black px-5 py-5 justify-self-start` : ""}>
+      <div className={timer > 0 && currentStep !== 5 ? `border-2 border-black px-5 py-5 justify-self-start row-start-1` : ""}>
         {timer > 0 && currentStep !== 5 ? (
           <p className="">
             Du har{" "}
@@ -89,30 +90,37 @@ const TicketSystem = () => {
           ""
         )}
       </div>
-      {currentStep === 1 && (
-        <section>
-          <TicketSelector handleNextClick={handleNextClick} />
-        </section>
-      )}
-      {currentStep === 2 && (
-        <section>
-          <CampingSelector handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
-        </section>
-      )}
-      {currentStep === 3 && (
-        <section>
-          <GuestInfo handleNextClick={handleNextClick} handleBackClick={handleBackClick} reservationId={reservationId} />
-        </section>
-      )}
-      {currentStep === 4 && (
-        <section>
-          <Payment handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
-        </section>
-      )}
-      {currentStep === 5 && (
-        <section>
-          <ReservationComplete />
-        </section>
+      <div className="row-start-2">
+        {currentStep === 1 && (
+          <section>
+            <TicketSelector handleNextClick={handleNextClick} />
+          </section>
+        )}
+        {currentStep === 2 && (
+          <section>
+            <CampingSelector handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
+          </section>
+        )}
+        {currentStep === 3 && (
+          <section>
+            <GuestInfo handleNextClick={handleNextClick} handleBackClick={handleBackClick} reservationId={reservationId} />
+          </section>
+        )}
+        {currentStep === 4 && (
+          <section>
+            <Payment handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
+          </section>
+        )}
+        {currentStep === 5 && (
+          <section>
+            <ReservationComplete />
+          </section>
+        )}
+      </div>
+      {currentStep > 1 && currentStep !== 5 && (
+        <div className="self_start row-start-2">
+          <Recepit />
+        </div>
       )}
     </div>
   );

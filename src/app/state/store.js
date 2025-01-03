@@ -50,7 +50,7 @@ const useTicketStore = create((set) => ({
       return { ...state };
     }),
 
-  selectedSpot: null,
+  selectedSpot: 0,
   twoPersonTentCount: 0,
   threePersonTentCount: 0,
   tentPrices: { "2-person": 299, "3-person": 399 },
