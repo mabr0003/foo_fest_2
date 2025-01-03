@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Barrio&family=Bayon&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: linear-gradient(180deg, rgba(185, 255, 242, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --foreground: #171717;
+  --accent: #e8e1ef;
+  --text-color: #1b1b1b;
+  --transparant-bg: rgba(0, 0, 0, 0.336);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  background: var(--background);
+  color: var(--text-color);
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+
+  @media (width < 754px) {
+    padding: 0 2rem;
+  }
+}
+
+section {
+  margin: 2rem 0;
+}
+
+.band_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.band_list > li:nth-child(6n + 1) {
+  margin-left: 20px;
+}
+
+h1 {
+  font-family: "Barrio", system-ui;
+  font-size: 3rem;
+}
+
+h2 {
+  font-family: "Barrio", system-ui;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.bayon {
+  font-family: "Bayon", sans-serif;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+}
+
+/*---- DOT til valgt weekday ---- */
+.button_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.button_dot::before {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.weekdays button:first-child {
+  grid-column: 1;
+}
+.weekdays button:nth-child(2) {
+  grid-column: 3;
+}
+.weekdays button:nth-child(3) {
+  grid-column: 5;
+}
+.weekdays button:nth-child(4) {
+  grid-column: 7;
+}
+.weekdays button:nth-child(5) {
+  grid-column: 2;
+}
+.weekdays button:nth-child(6) {
+  grid-column: 4;
+}
+.weekdays button:last-child {
+  grid-column: 6;
+}
