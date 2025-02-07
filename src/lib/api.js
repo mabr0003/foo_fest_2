@@ -66,6 +66,18 @@ export async function postGuests(subdata) {
   const data = await response.json();
   return data;
 }
+
+export async function sendData(guestInfo, reservationId) {
+  const data = guestInfo.map((guest) => ({
+    firstname: guest.firstname,
+    lastname: guest.lastname,
+    email: guest.email,
+    reservationid: reservationId,
+  }));
+
+  await postGuests(data);
+}
+
 export async function reserveSpot(area, amount) {
   const response = await fetch(url + "/reserve-spot", {
     method: "PUT",

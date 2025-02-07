@@ -5,7 +5,6 @@ const useTicketStore = create((set) => ({
   regularTickets: 0,
   VipPrice: 1299,
   RegularPrice: 799,
-  totalPrice: 0,
   reservation: 99,
   goGreen: false,
 
@@ -20,14 +19,12 @@ const useTicketStore = create((set) => ({
         const newVipTickets = state.vipTickets + 1;
         return {
           vipTickets: newVipTickets,
-          totalPrice: newVipTickets * state.VipPrice + state.regularTickets * state.RegularPrice,
         };
       }
       if (type === "Regular") {
         const newRegularTickets = state.regularTickets + 1;
         return {
           regularTickets: newRegularTickets,
-          totalPrice: state.vipTickets * state.VipPrice + newRegularTickets * state.RegularPrice,
         };
       }
     }),
@@ -37,14 +34,12 @@ const useTicketStore = create((set) => ({
         const newVipTickets = state.vipTickets - 1;
         return {
           vipTickets: newVipTickets,
-          totalPrice: newVipTickets * state.VipPrice + state.regularTickets * state.RegularPrice,
         };
       }
       if (type === "Regular" && state.regularTickets > 0) {
         const newRegularTickets = state.regularTickets - 1;
         return {
           regularTickets: newRegularTickets,
-          totalPrice: state.vipTickets * state.VipPrice + newRegularTickets * state.RegularPrice,
         };
       }
       return { ...state };

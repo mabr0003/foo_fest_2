@@ -1,0 +1,9 @@
+.band_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.band_list > li:nth-child(6n + 1) {
+  margin-left: 20px;
+}

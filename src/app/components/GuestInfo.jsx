@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import useTicketStore from "../state/store";
-import { sendData } from "@/lib/actions";
+import { sendData } from "@/lib/api";
 import TicketFlowButton from "./TicketFlowButton";
 
 const GuestInfo = ({ handleNextClick, handleBackClick, reservationId }) => {
@@ -38,7 +38,7 @@ const GuestInfo = ({ handleNextClick, handleBackClick, reservationId }) => {
       <form onSubmit={handleSubmit}>
         {guestInfo.map((guest, index) => (
           <div key={index} className={`mb-4 border-2 p-4 rounded ${isGuestComplete(guest) ? "border-green-500" : "border-accent"}`}>
-            <h3>Guest {index + 1}</h3>
+            <h3>Guest {index + 1 + " *"}</h3>
             <div className="flex flex-col gap-2">
               <label>
                 First Name:

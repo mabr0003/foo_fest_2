@@ -36,16 +36,6 @@ section {
   margin: 0 0 2rem 0;
 }
 
-.band_list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.band_list > li:nth-child(6n + 1) {
-  margin-left: 20px;
-}
-
 h1 {
   font-family: "Barrio", system-ui;
   font-size: 3rem;
@@ -63,46 +53,4 @@ h2 {
 
 p {
   font-family: "Lato", sans-serif;
-}
-
-/*---- DOT til valgt weekday ---- */
-.button_container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.button_dot::before {
-  content: "";
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  background-color: var(--accent);
-  border-radius: 50%;
-  position: absolute;
-  left: -1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.weekdays button:first-child {
-  grid-column: 1;
-}
-.weekdays button:nth-child(2) {
-  grid-column: 3;
-}
-.weekdays button:nth-child(3) {
-  grid-column: 5;
-}
-.weekdays button:nth-child(4) {
-  grid-column: 7;
-}
-.weekdays button:nth-child(5) {
-  grid-column: 2;
-}
-.weekdays button:nth-child(6) {
-  grid-column: 4;
-}
-.weekdays button:last-child {
-  grid-column: 6;
 }

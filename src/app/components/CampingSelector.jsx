@@ -23,11 +23,12 @@ const CampingSelector = ({ handleNextClick, handleBackClick }) => {
 
   return (
     <div className="grid">
-      <h1 className="text-center">Vælg Campingområde</h1>
+      <h1 className="text-center flex justify-self-center">
+        Vælg Campingområde <span className="text-xl">*</span>
+      </h1>
       <div className="justify-self-center my-4">
         <GoGreen />
       </div>
-
       {loading ? (
         <p>Loading camping spots...</p>
       ) : (
@@ -49,7 +50,7 @@ const CampingSelector = ({ handleNextClick, handleBackClick }) => {
         </div>
       )}
       <div className="justify-self-center mt-8">
-        <h3 className="bayon text-center">Tilkøb telte</h3>
+        <h3 className="bayon text-center text-xl">Tilkøb telte</h3>
         <div className="flex flex-col gap-4">
           <div className="w-full bayon flex gap-10  px-5 py-3 rounded-lg justify-between mb-3 self-start">
             <h3>2 Personers telt {tentPrices["2-person"]},-</h3>

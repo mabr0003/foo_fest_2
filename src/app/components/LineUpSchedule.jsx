@@ -1,12 +1,17 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { getBands, getSchedule } from "@/lib/api";
-import Link from "next/link";
+
+import WeekDaySelector from "./WeekdaySelector/WeekDaySelector";
+import BandList from "./BandList/BandList";
 
 const LineUpSchedule = () => {
   const [bands, setBands] = useState([]);
   const [schedule, setSchedule] = useState({});
   const [selectedDay, setSelectedDay] = useState("mon");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredBands, setFilteredBands] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,6 +19,7 @@ const LineUpSchedule = () => {
       const scheduleData = await getSchedule();
       setBands(bandsData);
       setSchedule(scheduleData);
+      setFilteredBands(bandsData);
     }
 
     fetchData();
@@ -39,40 +45,38 @@ const LineUpSchedule = () => {
   };
 
   const bandsPlayingToday = getBandsForSelectedDay();
+
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    if (query === "") {
+      setFilteredBands(bands);
+    } else {
+      const filtered = bands.filter((band) => band.name.toLowerCase().includes(query));
+      setFilteredBands(filtered);
+    }
+  };
+
   return (
     <div>
       <main>
         <section className="line_ups">
           <div className="mb-10 grid">
             <h2 className="text-center">Line-ups</h2>
-            <div className="bayon flex flex-col gap-3 md:grid grid-cols-7 grid-rows-2 m-auto md:justify-items-center weekdays text-xl border-b-2 border-black py-3">
-              {weekdays.map((day) => (
-                <button key={day.id} onClick={() => setSelectedDay(day.id)} className={`${selectedDay === day.id ? "button_container button_dot" : ""}`}>
-                  {day.label}
-                </button>
-              ))}
-            </div>
+            <WeekDaySelector weekdays={weekdays} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           </div>
 
-          <ul className="bayon band_list">
-            {bands.map((band) => (
-              <li key={band.name} className={`px-2 ${bandsPlayingToday.has(band.name) ? "bg-accent transition-colors rounded-lg" : ""}`}>
-                <Link href={`/bands/${band.slug}`}>{band.name}</Link>
-              </li>
-            ))}
-          </ul>
+          <div className="mb-6">
+            <input type="text" placeholder="Søg efter bands.." value={searchQuery} onChange={handleSearch} className="border-2 rounded-lg px-4 py-2" />
+          </div>
+
+          <BandList bands={filteredBands} bandsPlayingToday={bandsPlayingToday} />
         </section>
 
         <section className="grid">
           <h2 className="text-center">Program</h2>
-          <div className="bayon flex flex-col gap-3 md:grid grid-cols-7 grid-rows-2 m-auto md:justify-items-center weekdays text-xl border-b-2 border-black py-3">
-            {weekdays.map((day, index) => (
-              <button key={day.id} onClick={() => setSelectedDay(day.id)} className={`${index < 4 ? `row-start-1` : `row-start-2`} ${selectedDay === day.id ? "button_container button_dot" : ""}`}>
-                {day.label}
-              </button>
-            ))}
-          </div>
-
+          <WeekDaySelector weekdays={weekdays} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <div className="bayon md:grid grid-cols-3 gap-10 mt-10">
             {Object.entries(schedule).map(([scene, sceneSchedule]) => (
               <div key={scene} className="mb-10">

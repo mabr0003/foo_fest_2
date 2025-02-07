@@ -15,7 +15,9 @@ const TicketSelector = ({ handleNextClick }) => {
 
   return (
     <div>
-      <h1 className="text-center">Vælg Billetter</h1>
+      <h1 className="text-center flex justify-self-center">
+        Vælg Billetter <span className="text-xl">*</span>
+      </h1>
       <div className="md:grid grid-cols-2">
         <div className="self-center md:justify-self-center">
           <div className="bayon flex gap-10 bg-accent px-5 py-3 rounded-lg justify-between mb-3 self-start">
